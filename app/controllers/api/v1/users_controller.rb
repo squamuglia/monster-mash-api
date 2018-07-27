@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     find_user
-    render json: @users, status: 200
+    render json: @user, status: 200
   end
 
   def new

@@ -7,7 +7,7 @@ class Api::V1::HeadsController < ApplicationController
 
   def show
     find_head
-    render json: @heads, status: 200
+    render json: @head, status: 200
   end
 
   def new

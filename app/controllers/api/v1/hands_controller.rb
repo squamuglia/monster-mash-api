@@ -7,7 +7,7 @@ class Api::V1::HandsController < ApplicationController
 
   def show
     find_hand
-    render json: @hands, status: 200
+    render json: @hand, status: 200
   end
 
   def new
