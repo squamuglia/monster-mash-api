@@ -1,4 +1,4 @@
-class API::V1::HandsController < ApplicationController
+class Api::V1::HandsController < ApplicationController
 
   def index
     @hands = Hand.all
