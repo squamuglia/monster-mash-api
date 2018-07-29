@@ -7,7 +7,9 @@ class Api::V1::HeadsController < ApplicationController
 
   def show
     find_head
-    render json: @head, status: 200
+    @url = Rails.application.routes.url_helpers.rails_blob_path(@head, only_path: true)
+    @json = format.json{@head, @url}
+    render json: @json, status: 200
   end
 
   def new
@@ -15,6 +17,7 @@ class Api::V1::HeadsController < ApplicationController
   end
 
   def create
+    # byebug
     @head = Head.create(head_params)
     render json: @head, status: 201
   end
@@ -30,7 +33,7 @@ class Api::V1::HeadsController < ApplicationController
   end
 
   def head_params
-    # params.permit()
+    params.permit(:user_id, :image)
   end
 
 end
