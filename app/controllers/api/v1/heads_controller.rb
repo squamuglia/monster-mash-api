@@ -17,7 +17,7 @@ class Api::V1::HeadsController < ApplicationController
   end
 
   def create
-    # byebug
+    byebug
     @head = Head.create(head_params)
     render json: @head, status: 201
   end

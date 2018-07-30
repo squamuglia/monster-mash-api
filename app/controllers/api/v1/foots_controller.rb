@@ -7,6 +7,8 @@ class Api::V1::FootsController < ApplicationController
 
   def show
     find_foot
+    @url = Rails.application.routes.url_helpers.rails_blob_path(@foot.image, only_path: true)
+    @foot['url'] = @url
     render json: @foot, status: 200
   end
 
