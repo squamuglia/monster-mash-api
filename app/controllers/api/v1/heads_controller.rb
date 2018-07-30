@@ -2,20 +2,20 @@ class Api::V1::HeadsController < ApplicationController
 
   def index
     @heads = Head.all
-    @heads.map do |head| 
-        if (head.image.attachment)
-          head['url'] = Rails.application.routes.url_helpers.rails_blob_path(head.image, only_path: true)
-      end
-    end
+    # @heads.map do |head| 
+    #     if (head.image.attachment)
+    #       head['url'] = Rails.application.routes.url_helpers.rails_blob_path(head.image, only_path: true)
+    #   end
+    # end
     render json: @heads, status: 200
   end
 
   def show
     find_head
-    if @head.image
-      @url = Rails.application.routes.url_helpers.rails_blob_path(@head.image, only_path: true)
-      @head['url'] = @url
-    end
+    # if @head.image
+    #   @url = Rails.application.routes.url_helpers.rails_blob_path(@head.image, only_path: true) + '.png'
+    #   @head['url'] = @url
+    # end
     render json: @head, status: 200
   end
 
@@ -24,7 +24,6 @@ class Api::V1::HeadsController < ApplicationController
   end
 
   def create
-    # byebug
     @head = Head.create(head_params)
     render json: @head, status: 201
   end
@@ -40,7 +39,7 @@ class Api::V1::HeadsController < ApplicationController
   end
 
   def head_params
-    params.permit(:user_id, :image)
+    params.permit(:user_id, :url)
   end
 
 end
