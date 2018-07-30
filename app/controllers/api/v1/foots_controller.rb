@@ -32,7 +32,7 @@ class Api::V1::FootsController < ApplicationController
   end
 
   def foot_params
-    # params.permit()
+    params.permit(:user_id, :url)
   end
 
 end
