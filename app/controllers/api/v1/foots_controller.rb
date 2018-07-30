@@ -1,4 +1,6 @@
 class Api::V1::FootsController < ApplicationController
+  before_action :authenticate, only: [:create]
+
 
   def index
     @foots = Foot.all
