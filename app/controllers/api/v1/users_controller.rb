@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :requires_user, only: [:show]
 
   def index
     @users = User.all
@@ -6,7 +7,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    find_user
+    @user = User.find(params[:id])
+
+    #Get the token for authentication
+    token = get_token()
+
     render json: @user, status: 200
   end
 
@@ -15,8 +20,18 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    render json: @user, status: 201
+    @user = User.new(user_params)
+    if @user.save
+      render json: {
+        user_details: @user,
+        token: gen_token(),
+        status: 201
+      }
+    else
+      render json: {
+        errors: @user.errors.full_messages
+      }, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -30,7 +45,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    # params.permit()
+    params.permit(:user_id, :username, :email, :password, :profile_pic, :bio, :single, :created_at, :updated_at)
   end
 
 end

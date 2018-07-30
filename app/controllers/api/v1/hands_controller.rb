@@ -1,8 +1,10 @@
 class Api::V1::HandsController < ApplicationController
+  before_action :authenticate, only: [:create]
+
 
   def index
     @hands = Hand.all
-    @hands.map do |hand| 
+    @hands.map do |hand|
         if (hand.image.attachment)
           hand['url'] = Rails.application.routes.url_helpers.rails_blob_path(hand.image, only_path: true)
       end

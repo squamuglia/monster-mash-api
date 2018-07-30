@@ -1,8 +1,10 @@
 class Api::V1::HeadsController < ApplicationController
+  before_action :authenticate, only: [:create]
+
 
   def index
     @heads = Head.all
-    @heads.map do |head| 
+    @heads.map do |head|
         if (head.image.attachment)
           head['url'] = Rails.application.routes.url_helpers.rails_blob_path(head.image, only_path: true)
       end

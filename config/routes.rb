@@ -22,8 +22,7 @@
       post '/users', to: 'users#create'
       get '/users/:id', to: 'users#show'
 
-
-
+      post '/login', to: 'auth#create'
     end
   end
 end
