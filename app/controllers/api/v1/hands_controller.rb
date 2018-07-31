@@ -14,10 +14,10 @@ class Api::V1::HandsController < ApplicationController
 
   def show
     find_hand
-    if @hand.image
-      @url = Rails.application.routes.url_helpers.rails_blob_path(@hand.image, only_path: true)
-      @hand['url'] = @url
-    end
+    # if @hand.image
+    #   @url = Rails.application.routes.url_helpers.rails_blob_path(@hand.image, only_path: true)
+    #   @hand['url'] = @url
+    # end
     render json: @head, status: 200
   end
 
