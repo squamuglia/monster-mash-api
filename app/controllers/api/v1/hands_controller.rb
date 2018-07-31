@@ -41,7 +41,7 @@ class Api::V1::HandsController < ApplicationController
   end
 
   def hand_params
-    # params.permit()
+    params.permit(:user_id, :url, :username)
   end
 
 end
