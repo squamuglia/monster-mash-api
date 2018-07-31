@@ -19,7 +19,10 @@ class Api::V1::FootsController < ApplicationController
   end
 
   def create
-    @foot = Foot.create(foot_params)
+    @upload = foot_params['url']
+    @user_id = foot_params['user_id']
+
+    @foot = Foot.create(user_id: @user_id, url: @upload)
     render json: @foot, status: 201
   end
 
