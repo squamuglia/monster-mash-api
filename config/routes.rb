@@ -23,6 +23,7 @@
       get '/users/:id', to: 'users#show'
 
       post '/login', to: 'auth#create'
+      get '/trytoken', to: 'auth#get_user'
     end
   end
 end

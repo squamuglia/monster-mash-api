@@ -14,5 +14,20 @@ class Api::V1::AuthController < ApplicationController
     end
   end
 
-  
+  def get_user
+    token = get_token()
+    token_info = decode_token()
+    userid = token_info[0]['sub']
+    @user = User.find_by(id: userid)
+    if(@user)
+      render json: {
+        user_details: @user,
+        status: 200
+      }
+    else
+      render json: {
+        errors: @user.errors.full_messages
+      }, status: :unauthorized
+    end
+  end
 end
