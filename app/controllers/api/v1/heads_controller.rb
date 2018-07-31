@@ -1,31 +1,14 @@
 class Api::V1::HeadsController < ApplicationController
-  before_action :authenticate, only: [:create]
+  # before_action :authenticate, only: [:create]
 
 
   def index
     @heads = Head.all
-<<<<<<< HEAD
-    # @heads.map do |head| 
-    #     if (head.image.attachment)
-    #       head['url'] = Rails.application.routes.url_helpers.rails_blob_path(head.image, only_path: true)
-    #   end
-    # end
-=======
-    @heads.map do |head|
-        if (head.image.attachment)
-          head['url'] = Rails.application.routes.url_helpers.rails_blob_path(head.image, only_path: true)
-      end
-    end
->>>>>>> tony
     render json: @heads, status: 200
   end
 
   def show
     find_head
-    # if @head.image
-    #   @url = Rails.application.routes.url_helpers.rails_blob_path(@head.image, only_path: true) + '.png'
-    #   @head['url'] = @url
-    # end
     render json: @head, status: 200
   end
 
@@ -34,7 +17,14 @@ class Api::V1::HeadsController < ApplicationController
   end
 
   def create
-    @head = Head.create(head_params)
+    @upload = head_params['url']
+    @user_id = head_params['user_id']
+
+    @file_path = "./public/#{SecureRandom.uuid}"
+
+    File.open(@file_path, 'w') { |file| file.write(@upload) }
+    
+    @head = Head.create(user_id: @user_id, url: "/#{@file_path}")
     render json: @head, status: 201
   end
 

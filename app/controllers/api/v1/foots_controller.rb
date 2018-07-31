@@ -1,5 +1,5 @@
 class Api::V1::FootsController < ApplicationController
-  before_action :authenticate, only: [:create]
+  # before_action :authenticate, only: [:create]
 
 
   def index
