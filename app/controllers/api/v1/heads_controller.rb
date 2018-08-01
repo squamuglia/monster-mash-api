@@ -14,10 +14,7 @@ class Api::V1::HeadsController < ApplicationController
 
   def show
     find_head
-    # if @head.image
-    #   @url = Rails.application.routes.url_helpers.rails_blob_path(@head.image, only_path: true)
-    #   @head['url'] = @url
-    # end
+
     render json: @head, status: 200
   end
 
