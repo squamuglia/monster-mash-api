@@ -18,6 +18,7 @@ class Api::V1::AuthController < ApplicationController
     token = get_token()
     token_info = decode_token()
     userid = token_info[0]['sub']
+
     @user = User.find_by(id: userid)
     if(@user)
       render json: {
