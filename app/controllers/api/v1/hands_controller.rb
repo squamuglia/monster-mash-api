@@ -34,6 +34,10 @@ class Api::V1::HandsController < ApplicationController
     find_hand.destroy
   end
 
+  def logo
+    send_file 'public/handlogo.png', type: 'image/png', disposition: 'inline'
+  end
+
   private
 
   def find_hand

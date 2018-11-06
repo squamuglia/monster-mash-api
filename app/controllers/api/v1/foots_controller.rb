@@ -1,7 +1,5 @@
 class Api::V1::FootsController < ApplicationController
   before_action :authenticate, only: [:create]
-
-
   def index
     @foots = Foot.all
     render json: @foots, status: 200
@@ -25,6 +23,10 @@ class Api::V1::FootsController < ApplicationController
 
   def destroy
     find_foot.destroy
+  end
+
+  def logo
+    send_file 'public/footlogo.png', type: 'image/png', disposition: 'inline'
   end
 
   private

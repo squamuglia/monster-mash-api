@@ -31,6 +31,10 @@ class Api::V1::HeadsController < ApplicationController
     find_head.destroy
   end
 
+  def logo
+    send_file 'public/headlogo.png', type: 'image/png', disposition: 'inline'
+  end
+
   private
 
   def find_head
